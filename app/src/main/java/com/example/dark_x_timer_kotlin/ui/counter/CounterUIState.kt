@@ -4,4 +4,5 @@ data class CounterUIState(
     val time: String = "00:00:00",
     val running: Boolean = false,
     val paused: Boolean = false,
+    val isBottomSheetVisible: Boolean = false,
 )

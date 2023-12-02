@@ -5,7 +5,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import java.util.Timer
 import kotlin.concurrent.scheduleAtFixedRate
-import kotlin.properties.Delegates
 
 class CounterViewModel : ViewModel() {
     private val _uiState = MutableStateFlow(CounterUIState())
@@ -17,7 +16,6 @@ class CounterViewModel : ViewModel() {
     private var _isPaused = false
 
     val uiState = _uiState.asStateFlow()
-
 
     init {
         startTime = System.currentTimeMillis()
@@ -72,6 +70,14 @@ class CounterViewModel : ViewModel() {
             paused = _isPaused,
             time = formatTime(elapsedTime),
         )
+    }
+
+    fun showBottomSheet() {
+        _uiState.value = _uiState.value.copy(isBottomSheetVisible = true)
+    }
+
+    fun hideBottomSheet() {
+        _uiState.value = _uiState.value.copy(isBottomSheetVisible = false)
     }
 
 }
