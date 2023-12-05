@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.History
 import androidx.compose.material.icons.filled.PlayArrow
@@ -34,8 +33,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.window.Dialog
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.dark_x_timer_kotlin.R
+import com.example.dark_x_timer_kotlin.ui.AppViewModelProvider
+import com.example.dark_x_timer_kotlin.ui.counter.historySheet.HistoryBottomSheet
+import com.example.dark_x_timer_kotlin.ui.counter.saveDialog.SaveDialog
 import com.example.dark_x_timer_kotlin.ui.theme.Dark_x_timer_kotlinTheme
 import com.example.dark_x_timer_kotlin.ui.theme.PastelBlue
 import com.example.dark_x_timer_kotlin.ui.theme.PastelGreen
@@ -44,9 +47,20 @@ import com.example.dark_x_timer_kotlin.ui.theme.PastelRed
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CounterScreen(
-    viewModel: CounterViewModel = viewModel(),
+    viewModel: CounterViewModel = viewModel(
+        factory = AppViewModelProvider.Factory
+    ),
 ) {
     val uiState by viewModel.uiState.collectAsState()
+
+    if (uiState.isSaveDialogVisible) {
+        Dialog(onDismissRequest = viewModel::hideSaveDialog) {
+            SaveDialog(
+                time = uiState.time,
+                onDismiss = viewModel::hideSaveDialog,
+            )
+        }
+    }
     Scaffold(
         topBar = {
             TopAppBar(
@@ -69,29 +83,7 @@ fun CounterScreen(
     ) { it ->
         if (uiState.isBottomSheetVisible) {
             ModalBottomSheet(onDismissRequest = { viewModel.hideBottomSheet() }) {
-                val list = (0..100).map { "Solve History $it" }
-                LazyColumn {
-                    item {
-                        Text(
-                            text = "History",
-                            modifier = Modifier.padding(16.dp),
-                            style = MaterialTheme.typography.headlineMedium,
-                            fontWeight = FontWeight.Bold,
-                        )
-                    }
-                    items(list.size) {
-                        Card(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(16.dp)
-                        ) {
-                            Text(
-                                text = list[it],
-                                modifier = Modifier.padding(16.dp),
-                            )
-                        }
-                    }
-                }
+                HistoryBottomSheet()
             }
         }
         Body(
@@ -130,14 +122,9 @@ fun Body(
 
         AnimatedVisibility(uiState.running && uiState.paused) {
             ActionCard(
-                onReset = {
-                    viewModel.onReset()
-                },
-                onResume = {
-                    viewModel.onResume()
-                },
-                onSave = { },
-
+                onReset = viewModel::onReset,
+                onResume = viewModel::onResume,
+                onSave = viewModel::showSaveDialog,
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 16.dp)

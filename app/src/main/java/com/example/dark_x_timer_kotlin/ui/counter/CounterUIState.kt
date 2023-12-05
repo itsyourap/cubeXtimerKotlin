@@ -5,4 +5,5 @@ data class CounterUIState(
     val running: Boolean = false,
     val paused: Boolean = false,
     val isBottomSheetVisible: Boolean = false,
+    val isSaveDialogVisible: Boolean = false,
 )

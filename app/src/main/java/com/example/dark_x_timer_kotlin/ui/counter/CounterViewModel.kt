@@ -6,7 +6,8 @@ import kotlinx.coroutines.flow.asStateFlow
 import java.util.Timer
 import kotlin.concurrent.scheduleAtFixedRate
 
-class CounterViewModel : ViewModel() {
+class CounterViewModel(
+) : ViewModel() {
     private val _uiState = MutableStateFlow(CounterUIState())
 
     private var startTime = 0L
@@ -78,6 +79,14 @@ class CounterViewModel : ViewModel() {
 
     fun hideBottomSheet() {
         _uiState.value = _uiState.value.copy(isBottomSheetVisible = false)
+    }
+
+    fun showSaveDialog() {
+        _uiState.value = _uiState.value.copy(isSaveDialogVisible = true)
+    }
+
+    fun hideSaveDialog() {
+        _uiState.value = _uiState.value.copy(isSaveDialogVisible = false)
     }
 
 }
