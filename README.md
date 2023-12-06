@@ -9,10 +9,7 @@ A simple timer for your everyday cube solving needs.
 
 ## Screenshots
 
-<img src="screenshots/timer_initial.png" height="400" alt="Initial Timer">
-<img src="screenshots/timer_paused.png" height="400" alt="Paused Timer">
-<img src="screenshots/timer_save.png" height="400" alt="Running Timer">
-<img src="screenshots/timer_history.png" height="400" alt="Timer History">
+<img src="screenshots/timer_initial.png" height="400" alt="Initial Timer"> <img src="screenshots/timer_paused.png" height="400" alt="Paused Timer"> <img src="screenshots/timer_save.png" height="400" alt="Running Timer"> <img src="screenshots/timer_history.png" height="400" alt="Timer History">
 
 ## Features
 
