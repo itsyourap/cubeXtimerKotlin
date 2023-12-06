@@ -16,10 +16,12 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.dark_x_timer_kotlin.ui.AppViewModelProvider
+import com.example.dark_x_timer_kotlin.ui.theme.PastelRed
 import java.util.Date
 
 @Composable
@@ -51,9 +53,9 @@ fun HistoryBottomSheet(
                     trailingContent = {
                         val date = Date(it.date)
                         Row {
-                            Text(text = sdf.format(date))
+                            Text(text = sdf.format(date), modifier = Modifier.align(CenterVertically))
                             IconButton(onClick = { /*TODO*/ }) {
-                                 Icon(Icons.Outlined.Delete, contentDescription = null)
+                                 Icon(Icons.Outlined.Delete, contentDescription = null, tint = PastelRed)
                             }
                         }
                     }

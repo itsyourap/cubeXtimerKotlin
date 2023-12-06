@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 
 class HistoryViewModel(
-    val repo: SolveTimeRepo
+    repo: SolveTimeRepo
 ) : ViewModel() {
     val stateFlow = repo.getItems().map {
         HistorySheetState(
