@@ -33,6 +33,7 @@ A simple timer for your everyday cube solving needs.
 - [ ] Improve overall look of the app
 - [ ] Write some tests for view-models
 - [ ] Write a README.md file
+- [ ] Make a app icon
 
 ## Pre-requisites
 
