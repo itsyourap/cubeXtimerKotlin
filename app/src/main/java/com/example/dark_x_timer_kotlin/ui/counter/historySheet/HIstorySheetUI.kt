@@ -45,7 +45,7 @@ fun HistoryBottomSheet(
         java.text.SimpleDateFormat.SHORT
     )
 
-    Column(modifier = Modifier.padding(15.dp)) {
+    Column(modifier = Modifier.padding(10.dp)) {
         Text(text = "History", style = MaterialTheme.typography.headlineMedium)
         Spacer(modifier = Modifier.height(10.dp))
 
@@ -91,5 +91,6 @@ fun HistoryBottomSheet(
                 )
             }
         }
+        Spacer(modifier = Modifier.height(15.dp))
     }
 }
