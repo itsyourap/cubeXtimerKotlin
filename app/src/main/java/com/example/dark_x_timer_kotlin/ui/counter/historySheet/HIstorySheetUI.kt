@@ -1,10 +1,17 @@
 package com.example.dark_x_timer_kotlin.ui.counter.historySheet
 
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Delete
 import androidx.compose.material3.Card
@@ -16,8 +23,11 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.dark_x_timer_kotlin.ui.AppViewModelProvider
@@ -35,9 +45,21 @@ fun HistoryBottomSheet(
         java.text.SimpleDateFormat.SHORT
     )
 
-    Column(modifier = Modifier.padding(10.dp)) {
+    Column(modifier = Modifier.padding(15.dp)) {
         Text(text = "History", style = MaterialTheme.typography.headlineMedium)
         Spacer(modifier = Modifier.height(10.dp))
+
+        if (state.value.itemList.isEmpty()) {
+            Text(
+                modifier = Modifier.fillMaxWidth(),
+                text = "Empty",
+                style = MaterialTheme.typography.bodyMedium,
+                color = Color.Gray,
+                textAlign = TextAlign.Center
+            )
+            Spacer(modifier = Modifier.height(20.dp))
+        }
+
         state.value.itemList.forEach {
             Card(
                 modifier = Modifier.padding(vertical = 10.dp),
@@ -53,9 +75,16 @@ fun HistoryBottomSheet(
                     trailingContent = {
                         val date = Date(it.date)
                         Row {
-                            Text(text = sdf.format(date), modifier = Modifier.align(CenterVertically))
+                            Text(
+                                text = sdf.format(date),
+                                modifier = Modifier.align(CenterVertically)
+                            )
                             IconButton(onClick = { /*TODO*/ }) {
-                                 Icon(Icons.Outlined.Delete, contentDescription = null, tint = PastelRed)
+                                Icon(
+                                    Icons.Outlined.Delete,
+                                    contentDescription = null,
+                                    tint = PastelRed
+                                )
                             }
                         }
                     }
