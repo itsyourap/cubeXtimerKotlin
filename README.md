@@ -25,33 +25,7 @@ A simple timer for your everyday cube solving needs.
 - [x] History
 - [x] Save times
 
-## What's to be fixed?
-
-- [ ] Implement delete times
-- [ ] Make a dialog for delete confirmation
-- [ ] Improve Look of history
-- [ ] Improve overall look of the app
-- [ ] Write some tests for view-models
-- [ ] Write a README.md file
-- [ ] Make a app icon
-
-## Pre-requisites
-
-- Language: Kotlin
-- UI: Jetpack Compose
-- Architecture: MVVM (Model-View-ViewModel)
-- Database: Room (SQLite)
-
 ## How to contribute?
 
-- Fork the repository
-- Clone the repository
-- Create a new branch
-- Make your changes
-- Commit your changes
-- Push your changes
-- Create a pull request
-- Wait for the pull request to be reviewed
-- Wait for the pull request to be merged
-- Celebrate your contribution
-- Repeat
+Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct, and the process
+for submitting pull requests to us.
