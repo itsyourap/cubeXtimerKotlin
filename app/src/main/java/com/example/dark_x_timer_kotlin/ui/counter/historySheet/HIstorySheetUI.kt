@@ -54,7 +54,7 @@ fun HistoryBottomSheet(
                         val date = Date(it.date)
                         Row {
                             Text(text = sdf.format(date), modifier = Modifier.align(CenterVertically))
-                            IconButton(onClick = { /*TODO*/ }) {
+                            IconButton(onClick = { viewModel.delete(it) }) {
                                  Icon(Icons.Outlined.Delete, contentDescription = null, tint = PastelRed)
                             }
                         }
