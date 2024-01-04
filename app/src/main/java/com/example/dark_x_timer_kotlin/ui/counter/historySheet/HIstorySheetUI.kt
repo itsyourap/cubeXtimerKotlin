@@ -3,6 +3,7 @@ package com.example.dark_x_timer_kotlin.ui.counter.historySheet
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
@@ -18,6 +19,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.dark_x_timer_kotlin.ui.AppViewModelProvider
@@ -38,6 +41,18 @@ fun HistoryBottomSheet(
     Column(modifier = Modifier.padding(10.dp)) {
         Text(text = "History", style = MaterialTheme.typography.headlineMedium)
         Spacer(modifier = Modifier.height(10.dp))
+
+        if (state.value.itemList.isEmpty()) {
+            Text(
+                modifier = Modifier.fillMaxWidth(),
+                text = "Empty",
+                style = MaterialTheme.typography.bodyMedium,
+                color = Color.Gray,
+                textAlign = TextAlign.Center
+            )
+            Spacer(modifier = Modifier.height(20.dp))
+        }
+
         state.value.itemList.forEach {
             Card(
                 modifier = Modifier.padding(vertical = 10.dp),
