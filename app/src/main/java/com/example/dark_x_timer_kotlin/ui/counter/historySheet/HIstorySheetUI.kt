@@ -68,22 +68,15 @@ fun HistoryBottomSheet(
                     trailingContent = {
                         val date = Date(it.date)
                         Row {
-                            Text(
-                                text = sdf.format(date),
-                                modifier = Modifier.align(CenterVertically)
-                            )
-                            IconButton(onClick = { /*TODO*/ }) {
-                                Icon(
-                                    Icons.Outlined.Delete,
-                                    contentDescription = null,
-                                    tint = PastelRed
-                                )
+                            Text(text = sdf.format(date), modifier = Modifier.align(CenterVertically))
+                            IconButton(onClick = { viewModel.delete(it) }) {
+                                 Icon(Icons.Outlined.Delete, contentDescription = null, tint = PastelRed)
                             }
                         }
                     }
                 )
             }
         }
-        Spacer(modifier = Modifier.height(15.dp))
+        Spacer(modifier = Modifier.height(20.dp))
     }
 }
