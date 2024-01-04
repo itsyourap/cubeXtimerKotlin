@@ -77,5 +77,6 @@ fun HistoryBottomSheet(
                 )
             }
         }
+        Spacer(modifier = Modifier.height(20.dp))
     }
 }
