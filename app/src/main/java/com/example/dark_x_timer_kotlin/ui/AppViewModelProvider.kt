@@ -19,21 +19,21 @@ object AppViewModelProvider {
         }
         initializer {
             SaveViewModel(
-                timerApplicaiton().container.solveTimeRepo
+                timerApplication().container.solveTimeRepo
             )
         }
         initializer {
             HistoryViewModel(
-                timerApplicaiton().container.solveTimeRepo
+                timerApplication().container.solveTimeRepo
             )
         }
         initializer {
             DeleteViewModel(
-                timerApplicaiton().container.solveTimeRepo
+                timerApplication().container.solveTimeRepo
             )
         }
     }
 }
 
-fun CreationExtras.timerApplicaiton(): TimerApplication =
+fun CreationExtras.timerApplication(): TimerApplication =
     (this[AndroidViewModelFactory.APPLICATION_KEY] as TimerApplication)
