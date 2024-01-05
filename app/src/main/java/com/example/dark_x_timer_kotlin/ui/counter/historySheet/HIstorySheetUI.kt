@@ -22,8 +22,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.window.Dialog
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.dark_x_timer_kotlin.ui.AppViewModelProvider
+import com.example.dark_x_timer_kotlin.ui.counter.deleteDialog.DeleteDialog
 import com.example.dark_x_timer_kotlin.ui.theme.PastelRed
 import java.util.Date
 
@@ -37,6 +39,15 @@ fun HistoryBottomSheet(
     val sdf = java.text.SimpleDateFormat.getDateInstance(
         java.text.SimpleDateFormat.SHORT
     )
+
+    if (state.value.isDeleteConfirmationDialogVisible) {
+        Dialog(onDismissRequest = viewModel::hideDeleteConfirmationDialog) {
+            DeleteDialog(
+                item = state.value.deleteItem!!,
+                onDismiss = viewModel::hideDeleteConfirmationDialog
+            )
+        }
+    }
 
     Column(modifier = Modifier.padding(10.dp)) {
         Text(text = "History", style = MaterialTheme.typography.headlineMedium)
@@ -68,9 +79,16 @@ fun HistoryBottomSheet(
                     trailingContent = {
                         val date = Date(it.date)
                         Row {
-                            Text(text = sdf.format(date), modifier = Modifier.align(CenterVertically))
-                            IconButton(onClick = { viewModel.delete(it) }) {
-                                 Icon(Icons.Outlined.Delete, contentDescription = null, tint = PastelRed)
+                            Text(
+                                text = sdf.format(date),
+                                modifier = Modifier.align(CenterVertically)
+                            )
+                            IconButton(onClick = { viewModel.setForDeletion(it) }) {
+                                Icon(
+                                    Icons.Outlined.Delete,
+                                    contentDescription = null,
+                                    tint = PastelRed
+                                )
                             }
                         }
                     }
