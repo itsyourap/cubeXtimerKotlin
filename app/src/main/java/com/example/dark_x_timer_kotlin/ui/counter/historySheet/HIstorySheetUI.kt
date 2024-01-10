@@ -55,7 +55,18 @@ fun HistoryBottomSheet(
     }
 
     Column(modifier = Modifier.padding(20.dp)) {
-        Text(text = "History", style = MaterialTheme.typography.headlineMedium)
+        Row(horizontalArrangement = Arrangement.SpaceBetween) {
+            Text(text = "History", style = MaterialTheme.typography.headlineMedium)
+            Spacer(Modifier.weight(1f))
+            AssistChip(onClick = { /*TODO*/ }, label = { Text(text = "Filter") }, leadingIcon = {
+                Icon(
+                    Icons.Filled.FilterAlt,
+                    modifier = Modifier.size(AssistChipDefaults.IconSize),
+                    contentDescription = "Filter Chip"
+                )
+            })
+        }
+
         Spacer(modifier = Modifier.height(10.dp))
 
         if (state.value.itemList.isEmpty()) {
