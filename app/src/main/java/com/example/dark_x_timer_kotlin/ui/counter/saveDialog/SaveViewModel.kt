@@ -42,7 +42,7 @@ class SaveViewModel(
 
 fun SaveUIState.toItem(): SolveTimeItem {
     return SolveTimeItem(
-        name = name,
+        name = name.ifEmpty { "Untitled" },
         time = time,
         cubeType = cubeType,
         date = System.currentTimeMillis()
