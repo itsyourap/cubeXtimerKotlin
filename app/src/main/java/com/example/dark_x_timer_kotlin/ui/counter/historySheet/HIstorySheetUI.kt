@@ -25,6 +25,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.SuggestionChip
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -139,6 +140,20 @@ fun HistoryBottomSheet(
                         contentDescription = "Filter Chip"
                     )
                 })
+        }
+
+        Spacer(modifier = Modifier.height(5.dp))
+
+        Row(horizontalArrangement = Arrangement.SpaceBetween) {
+            SuggestionChip(
+                onClick = {},
+                label = { Text(text = "Best: ${viewModel.calculateBestTime()}") }
+            )
+            Spacer(Modifier.weight(1f))
+            SuggestionChip(
+                onClick = {},
+                label = { Text(text = "Average: ${viewModel.calculateAverageTime()}") }
+            )
         }
 
         Spacer(modifier = Modifier.height(10.dp))
