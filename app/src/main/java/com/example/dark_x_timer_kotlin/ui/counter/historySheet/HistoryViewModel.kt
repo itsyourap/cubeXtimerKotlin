@@ -10,6 +10,9 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.util.Locale
+import java.util.TimeZone
 
 class HistoryViewModel(
     private val repo: SolveTimeRepo
@@ -54,5 +57,24 @@ class HistoryViewModel(
 
     fun uncheckAllFilters(){
         selectedCubeTypes.clear()
+    }
+
+    fun calculateBestTime(): String {
+        val sdf = SimpleDateFormat("mm:ss:SS", Locale.getDefault())
+        sdf.timeZone = TimeZone.getTimeZone("UTC")
+
+        var bestTime = "99:59:99"
+        _uiState.value.itemList.forEach {
+            if (selectedCubeTypes.isEmpty() || selectedCubeTypes.contains(it.cubeType)) {
+                val currentBestTime = sdf.parse(bestTime)
+                val thisDateTime = sdf.parse(it.time)
+                if (thisDateTime != null && thisDateTime.before(currentBestTime))
+                    bestTime = it.time
+            }
+        }
+        if (bestTime == "99:59:99")
+            return "No Record"
+
+        return bestTime
     }
 }
