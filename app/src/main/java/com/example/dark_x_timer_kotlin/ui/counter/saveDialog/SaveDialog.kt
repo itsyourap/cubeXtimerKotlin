@@ -8,8 +8,11 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDropDown
+import androidx.compose.material.icons.filled.Info
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -124,6 +127,21 @@ fun SaveDialog(
                     onValueChange = viewModel::onNameChanged,
                     modifier = Modifier.fillMaxWidth()
                 )
+                viewModel.informationMessage.value?.let {
+                    Spacer(modifier = Modifier.height(15.dp))
+                    Row(verticalAlignment = CenterVertically) {
+                        Icon(
+                            modifier = Modifier.size(12.dp),
+                            imageVector = Icons.Filled.Info,
+                            contentDescription = null
+                        )
+                        Spacer(modifier = Modifier.width(5.dp))
+                        Text(
+                            text = it,
+                            style = MaterialTheme.typography.bodySmall
+                        )
+                    }
+                }
             }
             Spacer(modifier = Modifier.height(16.dp))
             Row(horizontalArrangement = Arrangement.End, modifier = Modifier.fillMaxWidth()) {
