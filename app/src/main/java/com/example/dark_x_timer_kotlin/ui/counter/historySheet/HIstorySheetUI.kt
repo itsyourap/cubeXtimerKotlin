@@ -178,7 +178,7 @@ fun HistoryBottomSheet(
                     ListItem(headlineContent = {
                         Text(text = it.time)
                     }, supportingContent = {
-                        Text(text = it.name)
+                        Text(text = it.name.ifEmpty { "Untitled" })
                     }, trailingContent = {
                         val date = Date(it.date)
                         Row {
